@@ -1,28 +1,12 @@
 'use strict';
 
-const TOKEN = process.env.TELEGRAM_TOKEN || '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
 const TelegramBot = require('node-telegram-bot-api');
-const options = {
-  webHook: {
-    // Port to which you should bind is assigned to $PORT variable
-    // See: https://devcenter.heroku.com/articles/dynos#local-environment-variables
-    port: process.env.PORT || 5000
-    // you do NOT need to set up certificates since Heroku provides
-    // the SSL certs already (https://<app-name>.herokuapp.com)
-    // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
-  }
-};
-// Heroku routes from port :443 to $PORT
-// Add URL of your app to env variable or enable Dyno Metadata
-// to get this automatically
-// See: https://devcenter.heroku.com/articles/dyno-metadata
-const url = process.env.APP_URL || 'https://evening-headland-56271.herokuapp.com/';
-const bot = new TelegramBot(TOKEN, options);
 
+// replace the value below with the Telegram token you receive from @BotFather
+const token = '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
 
-// This informs the Telegram servers of the new webhook.
-// Note: we do not need to pass in the cert, as it already provided
-bot.setWebHook(`${url}/bot${TOKEN}`);
+// Create a bot that uses 'polling' to fetch new updates
+const bot = new TelegramBot(token, { polling: true });
 
 const inlineOptions = {
   inlineQueries: {
@@ -94,7 +78,7 @@ bot.on('inline_query', (msg) => {
       { //https://core.telegram.org/bots/api#inlinequeryresultarticle
         id: '1',
         type: 'article',
-        title: 'Opción 1..',
+        title: 'Opción 1.',
         input_message_content: {
           message_text: 'contenido de opción 1'
         }
@@ -102,7 +86,7 @@ bot.on('inline_query', (msg) => {
       {
         id: '2',
         type: 'article',
-        title: 'Opción 2..',
+        title: 'Opción 2.',
         message_text: 'tow text',
         input_message_content: {
           message_text: 'contenido de opción 2'
