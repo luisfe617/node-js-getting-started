@@ -39,9 +39,9 @@ bot.onText(/^\/start$/, (msg, match) => {
   bot.sendMessage(msg.chat.id, `Bienvenido <b>${msg.from.first_name}</b>`, messageOptions);
 });
 
-bot.on(/^\/getLocation$/, (msg) => {
+bot.on(/^\/location$/, (msg) => {
   bot.sendLocation(msg.chat.id, 44.97108, -104.27719);
-  bot.sendMessage(msg.sendLocation);
+  bot.sendMessage(msg.chat.id, "Here is the point");
 });
 
 /*
