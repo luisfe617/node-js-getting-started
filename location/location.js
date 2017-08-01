@@ -26,7 +26,7 @@ bot.onText(/^\/start$/, (msg, match) => {
 /**
  * List for every entered message
  */
-bot.on(/^\/getLocation$/, (msg) => {
+bot.onText(/^\/getLocation$/, (msg) => {
 
     const chatId = msg.chat.id;
 
