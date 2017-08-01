@@ -19,17 +19,53 @@ bot.onText(/^\/start$/, (msg, match) => {
         Bienvenido <b>${msg.from.first_name}</b>, \n 
         \n
         <b>Comandos</b>
-        /getLocation
+        /sendContact
         `, messageOptions);
 });
 
 /**
  * List for every entered message
  */
-bot.onText(/^\/getLocation$/, (msg) => {
+bot.onText(/^\/sendContact$/, (msg) => {
 
     const chatId = msg.chat.id;
 
-    bot.sendLocation(chatId, 44.97108, -104.27719);
-    bot.sendMessage(chatId, msg);
+    bot.sendMessage(chatId, "<b>¿Qué quieres hacer?</b>", { //sendMessage: https://core.telegram.org/bots/api#sendmessage
+        parse_mode: 'HTML',
+        reply_markup: {
+            keyboard: [ //replykeyboardmarkup: https://core.telegram.org/bots/api#replykeyboardmarkup
+                [
+                    { //KeyboardButton: https://core.telegram.org/bots/api#keyboardbutton
+                        text: 'Enviar contacto',
+                        request_contact: true
+                    },
+                    { //KeyboardButton: https://core.telegram.org/bots/api#keyboardbutton
+                        text: 'Enviar ubicación',
+                        request_location: true
+                    }
+                ]
+            ],
+        },
+    }).then(function (data) {
+        console.log('message sent');
+        console.log(JSON.stringify(data));
+    }).catch(console.error);
+
+});
+
+
+bot.on('contact', (msg) => {
+
+    const chatId = msg.chat.id;
+
+    console.log('contact received');
+    console.log(JSON.stringify(msg));
+});
+
+bot.on('location', (msg) => {
+
+    const chatId = msg.chat.id;
+
+    console.log('location received');
+    console.log(JSON.stringify(msg));
 });
