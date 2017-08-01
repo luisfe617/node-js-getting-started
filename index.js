@@ -36,18 +36,10 @@ bot.onText(/^\/start$/, (msg, match) => {
     parse_mode: 'HTML'
   };
 
-  bot.sendMessage(msg.chat.id, `Bienvenido <b>${msg.from.first_name}</b>`, messageOptions);
+  bot.sendMessage(msg.chat.id, `Hola <b>${msg.from.first_name}</b>, ingresa el comando '/menu'`, messageOptions);
+
 });
 
-bot.on('message', (msg) => {
-    var location = "location";
-    if (msg.text.indexOf(location) === 0) {
-        bot.sendLocation(msg.chat.id,44.97108, -104.27719);
-        bot.sendMessage(msg.chat.id, "Here is the point");
-    }
-});
-
-/*
 bot.onText(/^\/menu$/, (msg, match) => {
 
   const chatId = msg.chat.id;
@@ -123,4 +115,3 @@ bot.on('chosen_inline_result', (msg) => {
   console.log(JSON.stringify(msg));
   bot.sendMessage(msg.from.id, `result selected id: ` + msg.result_id);
 });
-*/
